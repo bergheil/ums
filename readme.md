@@ -3,7 +3,7 @@
 
 ## Laravel sample application - User Management System
 
-Simple app written in Laravel for user management. The app uses a SQLite database stored in the database file database\database.sqlite.
+Simple app written in Laravel for user management. The app uses a SQLite database stored in the database file **database\database.sqlite**.
 Here you can find a simple graph illustrating the [domain model](./resources/assets/other/UMS-Domain_model.png) and the [ER Database chart](./resources/assets/other/UMS-Domain_model.png).
 
 
@@ -19,18 +19,18 @@ This app implements the following stories.
 
 ## Rest API
 
-In the routes/web.php file you can find the Rest API related to the operations indicated in the stories.
+In the **routes/web.php** file you can find the Rest API related to the operations indicated in the stories.
 The rest API uses controllers that implement the features required in the stories. 
 The controllers are:
-- LoginController: implements the login API
-- UserController: implements the user/group API
+- **LoginController**: implements the login API
+- **UserController**: implements the user/group API
 
 ## Html page view
 
 HTML pages have been implemented that represent the font-end of the application and are the following:
-- welcome: home page
-- login: login page and list of users
-- groups: list of the groups
+- **welcome**: home page
+- **login**: login page and list of users
+- **groups**: list of the groups
 
 
 ## Sequence of operations to build the project from scratch
@@ -43,11 +43,14 @@ HTML pages have been implemented that represent the font-end of the application 
 
 - Create database tables
   You must edit the file in database/migrations to change the columns of the default users table and adding some users as default.
-  After that you need to create a group table with the following teminal command: *php artisan make:migration create_groups_table --create=groups* and 
-  edit the new file with the Laravel ORM syntax, adding some groups as default.
-  After that you need to create a table users_groups with the command: *php artisan make:migration create_users_group_table --create=users_groups* and 
-  edit the generated file.
-  To create the database structure and data you should use the terminal command: *php artisan migrate*
+  After that you need to create a group table with the following teminal command:  
+  *php artisan make:migration create_groups_table --create=groups*  
+  and  edit the new file with the Laravel ORM syntax, adding some groups as default.
+  After that you need to create a table users_groups with the command:  
+  *php artisan make:migration create_users_group_table --create=users_groups*  
+  and edit the generated file.
+  To create the database structure and data you should use the terminal command:  
+  *php artisan migrate*
 
 - Create model classes for the database objects with the following commands:
   *php artisan make:model User*
@@ -74,12 +77,12 @@ and try this code example.
   *\App\User::find(1);*
 
 - Create a new user
-  *$new = new \App\User();*
-  *$new->name="Sansa Stark";*
-  *$new->email="sansa@domain.com";*
-  *$new->password="pwd";*
-  *$new->save();*
-  *echo $new;*
+  *$new = new \App\User();*  
+  *$new->name="Sansa Stark";*  
+  *$new->email="sansa@domain.com";*  
+  *$new->password="pwd";*  
+  *$new->save();*  
+  *echo $new;*  
 
 - Get all the user of admin group
   *\DB::table('users')->join("users_groups", "users_groups.user_id", "=", "users.id")->where('users_groups.group_id', 1)->select("users.id","users.name")->get();*
