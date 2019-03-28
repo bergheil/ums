@@ -53,6 +53,7 @@ class LoginController extends Controller
                 ->first();
 
             // When success write session variable
+            session(['isadmin' =>  false]); 
             if ($user) {                
                 session(['users' =>  $userdata['email']]);
                 $admin = \DB::table('users_groups')
@@ -61,7 +62,7 @@ class LoginController extends Controller
                     ->first();
                 if ($admin) {
                     session(['isadmin' =>  true]);                    
-                }
+                } 
 
                 // redirect to the home (list of users)
                 return \Redirect::to('welcome');

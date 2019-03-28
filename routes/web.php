@@ -18,11 +18,17 @@ Route::get('/', function () {
 
 // Home page
 Route::get('welcome', function () {
+    if (!session("users")) {
+        return \Redirect::to('login');
+    }
     return view('welcome');
 });
 
 // Redirect to the Group page
 Route::get('groups', function () {
+    if (!session("users")) {
+        return \Redirect::to('login');
+    }
     return view('groups');
 });
 

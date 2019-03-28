@@ -89,10 +89,12 @@
                 <div class="title m-b-md">
                    List of groups
                 </div>
+                
                 <div id="errorMsg"></div>
                 <div id="confirmMsg"></div>
                 @if (session('isadmin'))     
                     <div>                        
+                        Click the Icon <i class="fas fa-users"></i> o modify the group
                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Add group</button>          
                     </div>    
                     <table class="table table-hover"> 
@@ -101,6 +103,7 @@
                                 <th scope="col">Id</th>
                                 <th scope="col">Name</th>                                
                                 <th scope="col">Users</th>
+                                <th scope="col">Operations</th>
                             </tr>
                         </thead>              
                         <tbody>                            
