@@ -20,7 +20,7 @@ This app implements the following stories.
 ## Rest API
 
 In the **routes/web.php** file you can find the Rest API related to the operations indicated in the stories.
-The rest API uses controllers that implement the features required in the stories. 
+The rest API uses **controllers** that implement the features required in the stories. 
 The controllers are:
 - **LoginController**: implements the login API
 - **UserController**: implements the user/group API
@@ -53,13 +53,13 @@ HTML pages have been implemented that represent the font-end of the application 
   *php artisan migrate*
 
 - Create model classes for the database objects with the following commands:  
-  *php artisan make:model User*
-  *php artisan make:model Group*
-  *php artisan make:model UsersGroup*
+  *php artisan make:model User*  
+  *php artisan make:model Group*  
+  *php artisan make:model UsersGroup*  
 
-- You need to create the API controller using the following terminal command  
-  *php artisan make:controller LoginController*
-  *php artisan make:controller UserController*
+- You need to create the API controller using the following terminal command   
+  *php artisan make:controller LoginController*  
+  *php artisan make:controller UserController*  
 
 - Now you can write the API in the file **route/web.php**
 
@@ -67,13 +67,13 @@ HTML pages have been implemented that represent the font-end of the application 
 
 - Try the web app using the followind terminal command: *php artisan serve*
 
-## How to access to data Model 
-You can manipulate data using a very useful terminal php shell using the command "php artisan tinker"
+## How to access to data Model (for programmers)
+You can manipulate data using a very useful terminal php shell using the command *php artisan tinker*
 and try this code example.
-- View all users in database
+- View all users in database  
   *\App\User::all();*
 
-- Find a user with the id = 1
+- Find a user with the id = 1  
   *\App\User::find(1);*
 
 - Create a new user
@@ -84,7 +84,7 @@ and try this code example.
   *$new->save();*  
   *echo $new;*  
 
-- Get all the user of admin group
+- Get all the user of admin group  
   *\DB::table('users')->join("users_groups", "users_groups.user_id", "=", "users.id")->where('users_groups.group_id', 1)->select("users.id","users.name")->get();*
 
 
