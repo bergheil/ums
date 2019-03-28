@@ -35,11 +35,11 @@ HTML pages have been implemented that represent the font-end of the application 
 
 ## Sequence of operations to build the project from scratch
 
-- Creating the project using composer
+- Creating the project using composer  
   In the terminal: *composer create-project --prefer-dist laravel/laravel ums*
 
-- Configuration of Sqlite database
-  Edit the file *.env* and write the path of the file in DB_DATABASE variable
+- Configuration of Sqlite database  
+  Edit the file **.env** and write the path of the file in **DB_DATABASE** variable
 
 - Create database tables
   You must edit the file in database/migrations to change the columns of the default users table and adding some users as default.
@@ -52,12 +52,12 @@ HTML pages have been implemented that represent the font-end of the application 
   To create the database structure and data you should use the terminal command:  
   *php artisan migrate*
 
-- Create model classes for the database objects with the following commands:
+- Create model classes for the database objects with the following commands:  
   *php artisan make:model User*
   *php artisan make:model Group*
   *php artisan make:model UsersGroup*
 
-- You need to create the API controller using the following terminal command
+- You need to create the API controller using the following terminal command  
   *php artisan make:controller LoginController*
   *php artisan make:controller UserController*
 

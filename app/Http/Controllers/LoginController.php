@@ -8,14 +8,22 @@ use Illuminate\Support\Facades\Input;
 
 define ('ADMIN_GROUP', 1);
 
+/**
+ * Controller for Login API
+ */
 class LoginController extends Controller
 {
-    public function showLogin() {
-        // show the form
-        //return View::make('login');
+    /**
+     * Show the login Page
+     */
+    public function showLogin() {                
         return view('login');
     }
 
+    /**
+     * Make the authentication. 
+     * If the user a password is correct write a session variabile "users" and "isadmin" for user in the admin group
+     */
     public function doLogin() {
         // validate the info, create rules for the inputs
         $rules = array(
@@ -38,11 +46,13 @@ class LoginController extends Controller
                 'password'  => Input::get('password')
             );
 
+            // check if there is a user with the email and password
             $user = \DB::table('users')
                 ->where('email', $userdata['email'])
                 ->where('password',$userdata['password'])
                 ->first();
 
+            // When success write session variable
             if ($user) {                
                 session(['users' =>  $userdata['email']]);
                 $admin = \DB::table('users_groups')
@@ -52,8 +62,11 @@ class LoginController extends Controller
                 if ($admin) {
                     session(['isadmin' =>  true]);                    
                 }
+
+                // redirect to the home (list of users)
                 return \Redirect::to('welcome');
             } else {
+                // redirect to the login page
                 return \Redirect::to('login')->withErrors("Authentication failed.");
             }
         }
