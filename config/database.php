@@ -40,6 +40,13 @@ return [
             'foreign_key_constraints' => true,
         ],
 
+        'sqlite_test' => [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+            'foreign_key_constraints' => true,
+        ],
+
         'mysql' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),

@@ -13,6 +13,9 @@
 
 // Default view - Home page
 Route::get('/', function () {
+    if (!session("users")) {
+        return \Redirect::to('login');
+    }
     return view('welcome');
 });
 
