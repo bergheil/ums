@@ -40,6 +40,7 @@ HTML pages have been implemented that represent the font-end of the application 
 
 - Configuration of Sqlite database  
   Edit the file **.env** and write the path of the file in **DB_DATABASE** variable
+  Edit the file **.env.testing** and define connection in config/database.php
 
 - Create database tables
   You must edit the file in database/migrations to change the columns of the default users table and adding some users as default.
