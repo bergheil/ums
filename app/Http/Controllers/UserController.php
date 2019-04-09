@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Input;
 
 /**
  * Implement all the API for the User management
@@ -17,6 +15,10 @@ class UserController extends Controller
      * @id int Id of the user
      */
     public function destroy(Request $request, $id) {
+        // Delete first the record in users_groups
+        \App\UsersGroup::where('user_id', $id)->delete();
+
+        // and after the user
         $result = \App\User::destroy($id);
 
         return $result ;
@@ -37,16 +39,16 @@ class UserController extends Controller
      * Add a user
      * @request object Request object
      */
-    public function add(Request $request) { 
+    public function add(Request $request) {         
         $newUser = new \App\User();
-        $newUser->name = Input::get('name');
-        $newUser->email = Input::get('email');
-        $newUser->password = Input::get('password');
+        $newUser->name = $request['name'];
+        $newUser->email = $request['email'];
+        $newUser->password = $request['password'];
         $newUser->save();        
 
         $userGroup = new \App\UsersGroup();
         $userGroup->user_id = $newUser->id;
-        $userGroup->group_id = Input::get('group');
+        $userGroup->group_id = $request['group'];
         $userGroup->save();
 
         return $newUser;
@@ -59,7 +61,7 @@ class UserController extends Controller
      */
     public function addGroup(Request $request) { 
         $newGroup = new \App\Group();
-        $newGroup->name = Input::get('name');      
+        $newGroup->name = $request['name'];      
         $newGroup->save();
         return $newGroup;
     }
@@ -71,12 +73,13 @@ class UserController extends Controller
      */
     public function modifyGroup(Request $request, $id) { 
         $group = \App\Group::find($id);
-        $group->name = Input::get('name');
+        $group->name = $request['name'];
         $group->save();
+        
         // Change user-group relation
         \DB::table('users_groups')->where('group_id', '=', $id)->delete();
-        if (Input::get('users')) {
-            foreach (Input::get('users') as $utente) {
+        if ($request['users']) {
+            foreach ($request['users'] as $utente) {
                 \DB::table('users_groups')->insert(
                     array(                
                         'group_id' => $id,

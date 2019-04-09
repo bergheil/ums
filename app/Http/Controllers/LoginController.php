@@ -24,7 +24,7 @@ class LoginController extends Controller
      * Make the authentication. 
      * If the user a password is correct write a session variabile "users" and "isadmin" for user in the admin group
      */
-    public function doLogin() {
+    public function doLogin(Request $request) {        
         // validate the info, create rules for the inputs
         $rules = array(
             'email'    => 'required|email', // make sure the email is an actual email
@@ -38,12 +38,12 @@ class LoginController extends Controller
         if ($validator->fails()) {
             return \Redirect::to('login')
                 ->withErrors($validator) // send back all errors to the login form
-                ->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
+                ->withInput($request['password']); // send back the input (not the password) so that we can repopulate the form
         } else {
             // create our user data for the authentication
             $userdata = array(
-                'email'     => Input::get('email'),
-                'password'  => Input::get('password')
+                'email'     => $request['email'],
+                'password'  => $request['password']
             );
 
             // check if there is a user with the email and password
