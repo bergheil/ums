@@ -87,4 +87,5 @@ and try this code example.
 - Get all the user of admin group  
   *\DB::table('users')->join("users_groups", "users_groups.user_id", "=", "users.id")->where('users_groups.group_id', 1)->select("users.id","users.name")->get();*
 
-
+## Unit test environment
+For testing purpose an "in memory" database is created with the same initial data (phpunit, see config file .env.testing).
